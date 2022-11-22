@@ -1,4 +1,4 @@
-package regex
+package star
 
 import (
 	"fmt"
