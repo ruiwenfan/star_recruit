@@ -2,6 +2,7 @@ package main
 
 import (
 	"star"
+	"sync"
 )
 
 func main() {
@@ -29,5 +30,32 @@ func main() {
 	/* 	test := []int{2, 3, 1, 4, 2, 0, 1, 10, -1, -3, -10, 0, 239}
 	   	star.BubbleSort(test)
 	   	fmt.Println(test) */
-	star.Crud()
+	// test Singleton
+	/* 	var wg sync.WaitGroup
+	   	wg.Add(10)
+	   	for i := 0; i < 10; i++ {
+	   		go func() {
+	   			log.Printf("%p", star.GetSingleton2())
+	   			wg.Done()
+	   		}()
+	   	}
+	   	wg.Wait() */
+
+	ch := make(chan int, 5)
+
+	var wg sync.WaitGroup
+	wg.Add(2)
+	n := 0
+	for i := 0; i < 3; i++ {
+		go func() {
+			n++
+			star.Consumer(ch, n)
+		}()
+	}
+	wg.Done()
+	go func() {
+		star.Producer(ch)
+		wg.Done()
+	}()
+	wg.Wait()
 }
