@@ -21,6 +21,7 @@ func GetSingleton() *Singleton {
 	return one
 }
 
+// 参考了网上一些博客，可以直接用go提供的once函数
 func GetSingleton2() *Singleton {
 	once.Do(func() {
 		one = &Singleton{}

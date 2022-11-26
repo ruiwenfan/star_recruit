@@ -5,6 +5,7 @@ import (
 	"sync"
 )
 
+// 生产者，想chan写入数据
 func Producer(workShop chan int) {
 	var wg sync.WaitGroup
 	n := 0
@@ -17,6 +18,7 @@ func Producer(workShop chan int) {
 	close(workShop)
 }
 
+// 消费者
 func Consumer(workShop chan int, id int) {
 	for {
 		fmt.Println("Consumer is ", id, "work is ", <-workShop)

@@ -55,6 +55,8 @@ func Init() (*sql.DB, error) {
 	}
 	return db, nil
 }
+
+// 创建一个帖子
 func CreatePost(post Post) error {
 	db, err := Init()
 	if err != nil {
@@ -70,6 +72,8 @@ func CreatePost(post Post) error {
 	}
 	return nil
 }
+
+// 根据Id查询帖子
 func SerchPost(postId int) (*Post, error) {
 	db, err := Init()
 	if err != nil {
@@ -88,6 +92,8 @@ func SerchPost(postId int) (*Post, error) {
 
 	return &post, nil
 }
+
+// 删除一条帖子
 func DeletePost(postId int) error {
 	db, err := Init()
 	if err != nil {
@@ -142,8 +148,7 @@ func SearchPostAndUser(postId int) (*PostAndUser, error) {
 	return &ans, nil
 }
 
-// 路由我还不是很熟悉，现在就是加一个http服务
-// 需要静态设置一个路由，所以就先实现了CreatePost,其他的其实类似
+// 路由我还不是很熟悉，现在就是加一个http服务需要静态设置一个路由，所以就先实现了CreatePost,其他几个操作类似
 // 前端的消息是json编码格式
 func HttpCreatePost(w http.ResponseWriter, r *http.Request) {
 	// 从前端传来的request中获取body，也就是一条post
@@ -159,10 +164,10 @@ func HttpCreatePost(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, "CreatePost failed")
 		return
 	}
-	w.WriteHeader(200)
 	fmt.Fprintln(w, "CreatePost successed")
 }
 
+// 查找post和对应的用户名字和签名
 func HttpSearchPostAndUser(w http.ResponseWriter, r *http.Request) {
 	// 从前端传来的request中获取postId
 	r.ParseForm()

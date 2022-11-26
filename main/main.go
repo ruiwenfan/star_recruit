@@ -1,10 +1,5 @@
 package main
 
-import (
-	"fmt"
-	"star"
-)
-
 // 这个文件下测试的都是不需要http服务的
 
 func main() {
@@ -84,9 +79,11 @@ func main() {
 			}
 	*/
 
-	postAndUser, err := star.SearchPostAndUser(555)
-	if err != nil {
-		fmt.Println("SearchPostAndUser failed err is", err)
-	}
-	fmt.Println(*postAndUser)
+	/*
+		 	postAndUser, err := star.SearchPostAndUser(555)
+			if err != nil {
+				fmt.Println("SearchPostAndUser failed err is", err)
+			}
+			fmt.Println(*postAndUser)
+	*/
 }
