@@ -1,9 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"star"
-	"sync"
 )
+
+// 这个文件下测试的都是不需要http服务的
 
 func main() {
 	// test regexp
@@ -41,21 +43,50 @@ func main() {
 	   	}
 	   	wg.Wait() */
 
-	ch := make(chan int, 5)
+	/*
+		 	ch := make(chan int, 5)
 
-	var wg sync.WaitGroup
-	wg.Add(2)
-	n := 0
-	for i := 0; i < 3; i++ {
-		go func() {
-			n++
-			star.Consumer(ch, n)
-		}()
+			var wg sync.WaitGroup
+			wg.Add(2)
+			n := 0
+			for i := 0; i < 3; i++ {
+				go func() {
+					n++
+					star.Consumer(ch, n)
+				}()
+			}
+			wg.Done()
+			go func() {
+				star.Producer(ch)
+				wg.Done()
+			}()
+			wg.Wait()
+	*/
+
+	/*
+		 	if err := star.CreatePost(star.Post{Id: 124, Content: "i am not happy!", UserId: 1}); err != nil {
+				fmt.Println("star.CreatePost failed err is ", err)
+			}
+	*/
+	/* 	if err := star.UpdatePost(123, "be happy everyday!"); err != nil {
+		log.Println("UpdatePost failed err is ", err)
+	} */
+
+	/*
+		 	if err := star.DeletePost(123); err != nil {
+				log.Println("DeletePost failed err is", err)
+			}
+	*/
+
+	/*
+		 	if err := star.CreatePost(star.Post{Id: 555, Content: "today is 2022.11.26", UserId: 1}); err != nil {
+				log.Println("CreatePost failed err is", err)
+			}
+	*/
+
+	postAndUser, err := star.SearchPostAndUser(555)
+	if err != nil {
+		fmt.Println("SearchPostAndUser failed err is", err)
 	}
-	wg.Done()
-	go func() {
-		star.Producer(ch)
-		wg.Done()
-	}()
-	wg.Wait()
+	fmt.Println(*postAndUser)
 }
